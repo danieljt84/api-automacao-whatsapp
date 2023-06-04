@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.controller.form.BrandForm;
@@ -31,6 +32,8 @@ public class WhatsappGroupController {
 	WhatsappGroupService whatsappGroupService;
 	@Autowired
 	ShopService shopService;
+	@Autowired
+	BrandService brandService;
 	@Autowired
 	ModelMapper modelMapper;
 	
@@ -65,6 +68,25 @@ public class WhatsappGroupController {
 		}
 	}
 	
+	@GetMapping
+	public ResponseEntity getByBrand(@RequestParam Long idbrand){
+		try {
+			return ResponseEntity.ok(whatsappGroupService.getByBrand(idbrand));
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/delete/{id}")
+	public ResponseEntity delete(@PathVariable(name = "id") Long id){
+		try {
+			whatsappGroupService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
 
 	@GetMapping("/{id}/shops")
 	public ResponseEntity getShopsByGrouup(@PathVariable(name = "id") Long whatsappGroupId) {
@@ -75,7 +97,14 @@ public class WhatsappGroupController {
 		}
 	}
 	
-	
+	@GetMapping("/brand")
+	public ResponseEntity getBrandByGroup(@RequestParam(required = false) Integer limit,@RequestParam(required = false) Integer offset) {
+		try {
+			return ResponseEntity.ok(brandService.getBrandByGroup(limit,offset));
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
 	
 	private WhatsappGroup convertFormToPOJO(WhatsappGroupForm whatsappGroupForm){
 	 WhatsappGroup whatsappGroup =  modelMapper.map(whatsappGroupForm, WhatsappGroup.class);

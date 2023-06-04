@@ -8,12 +8,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "operation")
-public class Shop {
+public class Promoter {
 	
-	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private Long id;
 	private String name;
-	private String groupName;
+	private String number;
 	
 	public Long getId() {
 		return id;
@@ -27,14 +27,10 @@ public class Shop {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getGroupName() {
-		return groupName;
+	public String getNumber() {
+		return number;
 	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setNumber(String number) {
+		this.number = number;
 	}
-	
-	
-    
-
 }

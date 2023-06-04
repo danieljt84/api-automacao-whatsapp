@@ -48,6 +48,7 @@ public class BrandController {
 		}
 	}
 	
+	
 	@GetMapping
 	public ResponseEntity findBynameLike(@RequestParam String name){
 		try {
@@ -58,9 +59,9 @@ public class BrandController {
 	}
 	
 	@GetMapping("/list")
-	public ResponseEntity list(){
-		return ResponseEntity.ok(convertPOJOstoDTOs(brandService.findAll()));
-	}
+	public ResponseEntity list(@RequestParam(required = false) Integer limit,@RequestParam(required = false) Integer offset ){
+		return ResponseEntity.ok(convertPOJOstoDTOs(brandService.findAll())) ;
+	} 
 	
 	private Brand convertFormToPOJO(BrandForm brandForm){
 		return modelMapper.map(brandForm, Brand.class);

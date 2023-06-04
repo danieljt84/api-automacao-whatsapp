@@ -1,5 +1,6 @@
 package com.service;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -7,6 +8,8 @@ import javax.persistence.EntityExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.model.Brand;
@@ -56,6 +59,15 @@ public class BrandService {
 			logger.error(e.getMessage());
 			throw e;
 		}
+	}
+	
+	public List<Brand> getBrandByGroup(Integer limit, Integer offset){
+		try {
+			   return brandRepository.findBrandInGroup(limit,offset);
+			}catch (Exception e) {
+				logger.error(e.getMessage());
+				throw e;
+			}
 	}
 
 }

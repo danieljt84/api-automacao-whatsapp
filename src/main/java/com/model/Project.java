@@ -1,19 +1,16 @@
 package com.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "operation")
-public class Shop {
-	
-	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "project", schema = "operation")
+public class Project {
+	@Id
 	private Long id;
 	private String name;
-	private String groupName;
+	private String nameApi;
 	
 	public Long getId() {
 		return id;
@@ -27,14 +24,13 @@ public class Shop {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getGroupName() {
-		return groupName;
+	public String getNameApi() {
+		return nameApi;
 	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setNameApi(String nameApi) {
+		this.nameApi = nameApi;
 	}
 	
 	
-    
-
+	
 }
